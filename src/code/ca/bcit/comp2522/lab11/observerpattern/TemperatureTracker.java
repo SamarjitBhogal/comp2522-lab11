@@ -4,15 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TemperatureTracker {
+    private final static int FREEZING_POINT_FAHRENHEIT = 32;
+    private final static float CONV_FACTOR_NUMERATOR = 5.0f;
+    private final static float CONV_FACTOR_DENOMINATOR = 9.0f;
+    private final static float KELVIN_TO_CELSIUS_OFFSET = 273.15f;
+
     private int currentTemperatureCelsius;
     private final List<TemperatureProcessor> processors = new ArrayList<>();
 
     private int fahrenheitToCelsius(final int fahrenheit) {
-        return Math.round((fahrenheit - 32) * 5 / 9.0f);
+        return Math.round((fahrenheit - FREEZING_POINT_FAHRENHEIT) * CONV_FACTOR_NUMERATOR / CONV_FACTOR_DENOMINATOR);
     }
 
     private int kelvinToCelsius(final int kelvin) {
-        return Math.round(kelvin - 273.15f);
+        return Math.round(kelvin - KELVIN_TO_CELSIUS_OFFSET);
     }
 
     private void setCurrentTemperature(final int celsius) {
