@@ -14,6 +14,8 @@ package ca.bcit.comp2522.lab11.observerpattern;
  */
 public class RoadConditionAdvisor implements TemperatureProcessor {
 
+    private static final int FREEZING_TEMPERATURE_CELSIUS = 0;
+
     private final int thresholdTempInCelsius;
 
     /**
@@ -43,7 +45,7 @@ public class RoadConditionAdvisor implements TemperatureProcessor {
      * Validates the threshold temperature. Ensures it is appropriate for freezing conditions.
      */
     private static void validateThreshold(final int thresholdTempInCelsius) {
-        if(thresholdTempInCelsius > 0) {
+        if(thresholdTempInCelsius > FREEZING_TEMPERATURE_CELSIUS) {
             throw new IllegalArgumentException("A RoadConditionAdvisor can only be created for freezing temperatures.");
         }
     }

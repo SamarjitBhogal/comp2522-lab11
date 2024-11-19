@@ -15,6 +15,8 @@ import java.util.Observable;
  * @version 1.0
  */
 public class FurnaceController extends Observable implements TemperatureProcessor {
+    protected static final String FURNACE_ON_MESSAGE = "on";
+    protected static final String FURNACE_OFF_MESSAGE = "off";
 
     private final int targetTempInCelsius;
 
@@ -39,12 +41,13 @@ public class FurnaceController extends Observable implements TemperatureProcesso
      */
     @Override
     public void processTemperature(final int celsius) {
+        setChanged();
         if(celsius >= targetTempInCelsius) {
             System.out.println("The temperature is optimal, turning the furnace off.");
+            notifyObservers(FURNACE_OFF_MESSAGE);
         } else {
             System.out.println("The temperature is too low, turning the furnace on.");
+            notifyObservers(FURNACE_ON_MESSAGE);
         }
-        setChanged();
-        notifyObservers();
     }
 }
