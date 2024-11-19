@@ -20,7 +20,11 @@ public class TemperatureTracker {
     private final static float KELVIN_TO_CELSIUS_OFFSET = 273.15f;
 
     private int currentTemperatureCelsius;
-    private final List<TemperatureProcessor> processors = new ArrayList<>();
+    private final List<TemperatureProcessor> processors;
+
+    public TemperatureTracker() {
+        processors = new ArrayList<>();
+    }
 
     /**
      * Accepts a temperature reading in Celsius and updates the current temperature.
@@ -76,7 +80,7 @@ public class TemperatureTracker {
 
     /* Notifies all registered processors of the current temperature. */
     private void notifyProcessors() {
-        for (TemperatureProcessor processor : processors) {
+        for(TemperatureProcessor processor : processors) {
             processor.processTemperature(currentTemperatureCelsius);
         }
     }
