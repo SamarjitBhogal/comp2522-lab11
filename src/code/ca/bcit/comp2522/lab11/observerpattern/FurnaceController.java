@@ -1,5 +1,7 @@
 package ca.bcit.comp2522.lab11.observerpattern;
 
+import java.util.Observable;
+
 /**
  * Represents a furnace controller that controls the central heating furnace in a house based on a target temperature.
  * Reports if the furnace needs to turn on or off.
@@ -12,17 +14,17 @@ package ca.bcit.comp2522.lab11.observerpattern;
  * @author Raven Saballa
  * @version 1.0
  */
-public class FurnaceController implements TemperatureProcessor {
+public class FurnaceController extends Observable implements TemperatureProcessor {
 
     private final int targetTempInCelsius;
 
     /**
      * Constructs a new FurnaceController with the specified target temperature.
      *
-     * @param targetTemperature The target temperature in Celsius that the furnace should maintain.
+     * @param targetTemperatureInCelsius The target temperature in Celsius that the furnace should maintain.
      */
-    public FurnaceController(final int targetTemperature) {
-        this.targetTempInCelsius = targetTemperature;
+    public FurnaceController(final int targetTemperatureInCelsius) {
+        this.targetTempInCelsius = targetTemperatureInCelsius;
     }
 
     /**
@@ -38,5 +40,7 @@ public class FurnaceController implements TemperatureProcessor {
         } else {
             System.out.println("The temperature is too low, turning the furnace on.");
         }
+        setChanged();
+        notifyObservers();
     }
 }
