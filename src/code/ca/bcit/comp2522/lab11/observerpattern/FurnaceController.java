@@ -31,6 +31,10 @@ public class FurnaceController extends Observable implements TemperatureProcesso
      * Turns off the furnace if the temperature provided is greater than or equal to the target temperature,
      * otherwise turns on the furnace.
      *
+     * <p>
+     * Notifies observers of {@code FurnaceController} when the temperature is processed.
+     * </p>
+     *
      * @param celsius The new temperature in Celsius.
      */
     @Override
