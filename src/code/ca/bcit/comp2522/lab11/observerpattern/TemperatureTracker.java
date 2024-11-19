@@ -22,6 +22,11 @@ public class TemperatureTracker {
     private int currentTemperatureCelsius;
     private final List<TemperatureProcessor> processors;
 
+    /**
+     * Constructs a new {@code TemperatureTracker} instance.
+     * Initializes the list of temperature processors (observers)
+     * that will be notified of temperature updates.
+     */
     public TemperatureTracker() {
         processors = new ArrayList<>();
     }
@@ -42,6 +47,15 @@ public class TemperatureTracker {
      */
     public void takeInFahrenheitReading(final int fahrenheit) {
         setCurrentTemperature(fahrenheitToCelsius(fahrenheit));
+    }
+
+    /**
+     * Accepts a temperature reading in kelvin, converts it to Celsius and updates the current temperature.
+     *
+     * @param kelvin the temperature in kelvin.
+     */
+    public void takeInKelvinReading(final int kelvin) {
+        setCurrentTemperature(kelvinToCelsius(kelvin));
     }
 
     /**
