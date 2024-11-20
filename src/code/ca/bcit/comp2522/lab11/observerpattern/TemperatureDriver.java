@@ -13,12 +13,16 @@ package ca.bcit.comp2522.lab11.observerpattern;
  *   <li>RoadConditionAdvisor</li>
  *   <li>FurnaceUsageMonitor (via Java Observer)</li>
  * </ul>
- *
+ * <p>
  * Observables:
  * <ul>
  *   <li>TemperatureTracker</li>
  *   <li>FurnaceController (via Java Observable)</li>
  * </ul>
+ *
+ * @author Samarjit Bhogal
+ * @author Raven Saballa
+ * @version 1.0
  */
 public class TemperatureDriver {
 
@@ -60,25 +64,35 @@ public class TemperatureDriver {
         furnaceController.addObserver(furnaceUsageMonitor);
 
         // Trigger temperature readings to test all observers
-        System.out.println("Temperature in Celsius: 15°C\n");
+        System.out.println("Tracking Temperature in Celsius: 15°C");
         tempTracker.takeInCelsiusReading(15);
 
-        System.out.println("Temperature in Fahrenheit: 77°F (25°C)\n");
+        System.out.println("\nTracking Temperature in Fahrenheit: 77°F (25°C)");
         tempTracker.takeInFahrenheitReading(77);
 
-        System.out.println("Temperature in Kelvin: 313K (40°C)\n");
+        System.out.println("\nTracking Temperature in Kelvin: 313K (40°C)");
         tempTracker.takeInKelvinReading(313);
 
-        System.out.println("Temperature in Celsius: -5°C\n");
+        System.out.println("\nTracking Temperature in Celsius: -5°C");
         tempTracker.takeInCelsiusReading(-5);
 
-        System.out.println("Temperature in Fahrenheit: 5°F (-15°C)\n");
+        System.out.println("\nTracking Temperature in Fahrenheit: 5°F (-15°C)");
         tempTracker.takeInFahrenheitReading(5);
 
-        System.out.println("Temperature in Kelvin: 255K (-18°C)\n");
+        System.out.println("\nTracking Temperature in Kelvin: 255K (-18°C)");
         tempTracker.takeInKelvinReading(255);
 
-        System.out.println("Temperature in Celsius: 45°C\n");
+        System.out.println("\nTracking Temperature in Celsius: 45°C");
         tempTracker.takeInCelsiusReading(45);
+
+        // Removing observers and triggering temperature readings
+        tempTracker.removeTemperatureProcessor(furnaceController);
+        tempTracker.removeTemperatureProcessor(heatwaveMonitor);
+        tempTracker.removeTemperatureProcessor(roadAdvisor);
+        furnaceController.deleteObservers();
+
+        // No temperature reports should be generated
+        System.out.println("\nResult when setting a new temperature (15°C) after removing observers:");
+        tempTracker.takeInCelsiusReading(15);
     }
 }

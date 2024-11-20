@@ -64,6 +64,10 @@ public class TemperatureTracker {
      * @param processor the {@code TemperatureProcessor} to add.
      */
     public void addTemperatureProcessor(final TemperatureProcessor processor) {
+        if(processor == null) {
+            throw new IllegalArgumentException("Cannot add a null TemperatureProcessor to TemperatureTracker.");
+        }
+
         processors.add(processor);
     }
 
@@ -73,6 +77,10 @@ public class TemperatureTracker {
      * @param processor the {@code TemperatureProcessor} to remove.
      */
     public void removeTemperatureProcessor(final TemperatureProcessor processor) {
+        if(processor == null) {
+            throw new IllegalArgumentException("Cannot remove a null TemperatureProcessor from TemperatureTracker.");
+        }
+
         processors.remove(processor);
     }
 
@@ -94,8 +102,10 @@ public class TemperatureTracker {
 
     /* Notifies all registered processors of the current temperature. */
     private void notifyProcessors() {
-        for(TemperatureProcessor processor : processors) {
-            processor.processTemperature(currentTemperatureCelsius);
+        for(final TemperatureProcessor processor : processors) {
+            if(processor != null) {
+                processor.processTemperature(currentTemperatureCelsius);
+            }
         }
     }
 }
